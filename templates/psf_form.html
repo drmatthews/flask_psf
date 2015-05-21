@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Handle POST requests with Flask</title>
+    </head>
+    <body>
+        <div id="container">
+            <div class="title">
+                <h1>POST request with Flask</h1>
+            </div>
+            <div id="content">
+                <form method="post" action="{{ url_for('calculate_psf') }}">
+                  <label for="ex_wavelen">excitation wavelength:</label>
+                  <input type="text" name="ex_wavelen" /><br />
+                  <label for="em_wavelen">emission wavelength:</label>
+                  <input type="text" name="em_wavelen" /><br />
+                  <label for="num_aperture">NA:</label>
+                  <input type="text" name="num_aperture" /><br />
+                  <label for="refr_index">Refractive index:</label>
+                  <input type="text" name="refr_index" /><br />
+                  <input type="submit" />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
