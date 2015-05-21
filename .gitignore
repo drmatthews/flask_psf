@@ -3,3 +3,5 @@
 *.bin
 *.jpg
 *.png
+build/
+.ipyn.ipynb_checkpoints/
