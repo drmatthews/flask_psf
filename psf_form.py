@@ -10,3 +10,6 @@ class PSFForm(Form):
                              choices=[('confocal','Confocal'),\
                                       ('widefield','Widefield'),\
                                       ('twophoton','Two photon')])
+    model = SelectField('Model:',[validators.Required()],\
+                             choices=[('isotropic','Isotropic'),\
+                                      ('gaussian','Gaussian')])
