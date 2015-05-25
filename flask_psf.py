@@ -7,11 +7,10 @@ import numpy as np
 from math import asin,sin,cos
 from scipy.ndimage.interpolation import zoom
 from StringIO import StringIO
+import os
+
 app = Flask(__name__)
 jsglue = JSGlue(app)
-
-UPLOAD_FOLDER = 'uploads/'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def samples(wavelen,num_aperture,refr_index,mf=1):
     alpha = asin(num_aperture/refr_index)
@@ -26,7 +25,10 @@ def calculate_nyquist(microscope,ex_wavelen,em_wavelen,num_aperture,refr_index):
     if 'Widefield' in microscope:
         return samples(em_wavelen,num_aperture,refr_index)
         
-def save_psf(data):
+def save_psf(data,model,microscope):
+    imgpath = 'static/images/%s_%s_psf.png'%(model,microscope)
+    if os.path.isfile(imgpath):
+        os.remove(imgpath)
     arr = psf.mirror_symmetry(np.log10(data))
     arr[np.isneginf(arr)] = 0.0
     arr[np.where(arr < -2.5)] = 0.0
@@ -38,7 +40,6 @@ def save_psf(data):
     newarr[31,31] = 255
     im = Image.fromarray(newarr)
     im = im.convert("RGB")
-    imgpath = UPLOAD_FOLDER+'psf.png'
     im.save(imgpath)
     return imgpath
         
@@ -56,7 +57,7 @@ def update_psf(filename):
 @app.route('/get_psf',methods=['GET','POST'])
 def get_psf():
     form = PSFForm()
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         model = form.model.data
         print 'model',model
         if 'Gaussian' in model:
@@ -79,7 +80,7 @@ def get_psf():
         refr_index = float(form.refr_index.data)
     
         obsvol = calculate_psf(calc_model,scope,ex_wavelen,em_wavelen,num_aperture,refr_index)
-        imgpath = save_psf(obsvol.data)
+        imgpath = save_psf(obsvol.data,model,microscope)
         
         if 'Gaussian' in model:
             sigma = [sig*1000*2.355 for sig in obsvol.sigma.um]

@@ -27,7 +27,6 @@
 			                <form role="form" method="post" action="{{ url_for('get_psf') }}" class="pure-form pure-form-aligned" onsubmit="return false;">
 								<fieldset>
 									{{ form.hidden_tag() }}
-									<p>
 							        <div class="pure-control-group">
 										{{ form.model.label }}
 							            {{ form.model }}</br>
@@ -52,20 +51,21 @@
 										{{ form.refr_index.label }}
 							            {{ form.refr_index }}</br>
 							        </div>
-									</p>
 				                  	<button type="submit" class="pure-button pure-button-primary">Calculate</button>
 						  		</fieldset>
 			                </form>
 						</div>
 						<div class="pure-u-1-3 l-box" style="display: none;" id="psf">
 								<h3><span id="scope"></span></h3>
-								<h3>PSF standard deviation, z: <span id="sigmaz"></span> um</h3>
-								<h3>PSF standard deviation, r: <span id="sigmar"></span> um</h3>
-								<img class="pure-img" src="{{ url_for('update_psf',filename='psf.png')}}" style="width:256px;height:256px" id="psfimg">
+								<h3>PSF FWHM</h3>
+								<h3>z: <span id="sigmaz"></span> um</h3>
+								<h3>r: <span id="sigmar"></span> um</h3>
+								<img class="pure-img" src="" style="width:256px;height:256px" id="psfimg">
 						</div>
 						<div class ="pure-u-1-3 l-box" style="display: none;" id="nyquist">	
-							<h3>Pixel size in x,y for nyquist: <span id="nyquistxy"></span> nm</h3>
-							<h3>Pixel size in z for nyquist: <span id="nyquistz"></span> nm</h3>	
+							<h3>Pixel size for nyquist sampling</h3>
+							<h3>x,y: <span id="nyquistxy"></span> nm</h3>
+							<h3>z: <span id="nyquistz"></span> nm</h3>	
 						</div>
 			        </div>
 				</div>
