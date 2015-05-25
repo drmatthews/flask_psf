@@ -13,3 +13,4 @@ class PSFForm(Form):
     model = SelectField('Model:',[validators.Required()],\
                              choices=[('isotropic','Isotropic'),\
                                       ('gaussian','Gaussian')])
+                                      
