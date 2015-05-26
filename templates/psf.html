@@ -1,19 +1,10 @@
 <html>
     <head>
 		{{ JSGlue.include() }}
-		<style>
-		    .pure-g > div {
-		        -webkit-box-sizing: border-box;
-		        -moz-box-sizing: border-box;
-		        box-sizing: border-box;
-		    }
-		    .l-box {
-		        padding: 1em;
-		    }
-		</style>
 	    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	    <script src={{ url_for('static', filename='js/main.js') }}></script>	
 		<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/psf_style.css') }}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PSF Calculation</title>
     </head>
